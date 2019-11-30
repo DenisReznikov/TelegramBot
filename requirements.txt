@@ -1,3 +1,2 @@
 python-telegram-bot
 requests
-{'longitude': 30.272765, 'latitude': 59.937059}

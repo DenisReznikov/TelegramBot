@@ -6,9 +6,9 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
 from scr.eat_code.apiforeat import search
 CHOOSING = range(1)
 
-CALLBACK_BUTTON1_CAFE = "cafe"
-CALLBACK_BUTTON2_BAR = "bar"
-CALLBACK_BUTTON3_RESTAURANT = "restaurant"
+CALLBACK_BUTTON1_CAFE = "Кафе"
+CALLBACK_BUTTON2_BAR = "Бар"
+CALLBACK_BUTTON3_RESTAURANT = "Ресторан"
 
 TITLES = {
     CALLBACK_BUTTON1_CAFE: "Cafe ☕ ",
@@ -54,15 +54,16 @@ def do_done(update : Update, context):
     print(type_of_place)
     longitude,latitude =update.message.location.longitude, update.message.location.latitude
     result=search(type_of_place,longitude,latitude)
-    while i<3:
+    while i < 3:
         answer = result[str(i)+'answer']
         longitude = result[str(i)+'longitude']
         latitude = result[str(i)+'latitude']
         update.message.reply_text(text=answer)
-        update.message.reply_location(longitude,latitude)
+        update.message.reply_location(longitude=longitude, latitude=latitude)
         i += 1
     context.user_data.clear()
     return ConversationHandler.END
+
 
 def hedler_for_main():
     conv_handler = ConversationHandler(
