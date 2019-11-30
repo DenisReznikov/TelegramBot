@@ -1,5 +1,5 @@
 import requests
-import sys
+
 
 def search(type_of_place, longitude:float, latitude:float):
     print('request')
