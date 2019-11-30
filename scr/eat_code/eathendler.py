@@ -55,7 +55,6 @@ def do_done(update : Update, context):
     longitude,latitude =update.message.location.longitude, update.message.location.latitude
     result=search(type_of_place,longitude,latitude)
     while i<3:
-        print('kuk')
         answer = result[str(i)+'answer']
         longitude = result[str(i)+'longitude']
         latitude = result[str(i)+'latitude']
