@@ -1,10 +1,9 @@
-from telegram import Update,ParseMode
-from telegram.ext import Updater, CommandHandler
-from telegram import InlineKeyboardButton,KeyboardButton,ReplyKeyboardMarkup
+from telegram import Update
+from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
-from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters,
+from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler,CallbackContext)
-
+from scr.eat_code.apiforeat import search
 CHOOSING = range(1)
 
 CALLBACK_BUTTON1_CAFE = "cafe"
@@ -42,15 +41,29 @@ def do_eat(update: Update, context):
 
 def button(update : Update, context: CallbackContext):
     print("hi")
-    query = update.callback_query
-    chat_id = update.effective_message.chat_id
-    query.edit_message_text(
+    context.user_data['choise'] = update.callback_query.data
+    update.callback_query
+    update.callback_query.edit_message_text(
         text="Send U location",
     )
 
 
 def do_done(update : Update, context):
-    print(update.message.location)
+    i=0
+    type_of_place = context.user_data['choise']
+    print(type_of_place)
+    longitude,latitude =update.message.location.longitude, update.message.location.latitude
+    result=search(type_of_place,longitude,latitude)
+    while i<3:
+        print('kuk')
+        answer = result[str(i)+'answer']
+        longitude = result[str(i)+'longitude']
+        latitude = result[str(i)+'latitude']
+        update.message.reply_text(text=answer)
+        update.message.reply_location(longitude,latitude)
+        i += 1
+    context.user_data.clear()
+    return ConversationHandler.END
 
 def hedler_for_main():
     conv_handler = ConversationHandler(
