@@ -3,7 +3,7 @@ from telegram import InlineKeyboardButton
 from telegram import InlineKeyboardMarkup
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler,CallbackContext)
-from scr.eat_code.apiforeat import search
+from scr.eat_code.api_for_eat import search
 CHOOSING = range(1)
 
 CALLBACK_BUTTON1_CAFE = "Кафе"
@@ -41,8 +41,7 @@ def do_eat(update: Update, context):
 
 def button(update : Update, context: CallbackContext):
     print("hi")
-    context.user_data['choise'] = update.callback_query.data
-    update.callback_query
+    context.user_data['choice'] = update.callback_query.data
     update.callback_query.edit_message_text(
         text="Send U location",
     )
@@ -50,10 +49,10 @@ def button(update : Update, context: CallbackContext):
 
 def do_done(update : Update, context):
     i=0
-    type_of_place = context.user_data['choise']
+    type_of_place = context.user_data['choice']
     print(type_of_place)
-    longitude,latitude =update.message.location.longitude, update.message.location.latitude
-    result=search(type_of_place,longitude,latitude)
+    longitude,latitude = update.message.location.longitude, update.message.location.latitude
+    result=search(type_of_place, longitude, latitude)
     while i < 3:
         answer = result[str(i)+'answer']
         longitude = result[str(i)+'longitude']
@@ -65,14 +64,11 @@ def do_done(update : Update, context):
     return ConversationHandler.END
 
 
-def hedler_for_main():
+def eat_handler():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('eat', do_eat)],
-
-        states={
-            CHOOSING: [CallbackQueryHandler(button)]
-        },
-
+        states=
+        {CHOOSING: [CallbackQueryHandler(button)]},
         fallbacks=[MessageHandler(Filters.location, do_done)]
     )
     return conv_handler
