@@ -1,34 +1,9 @@
 from telegram import Update
-from telegram import InlineKeyboardButton
-from telegram import InlineKeyboardMarkup
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
-                          ConversationHandler, CallbackQueryHandler,CallbackContext)
+                          ConversationHandler, CallbackQueryHandler, CallbackContext)
 from scr.eat_code.api_for_eat import search
+from scr.other.keyboard import get_place_keyboard
 CHOOSING = range(1)
-
-CALLBACK_BUTTON1_CAFE = "Кафе"
-CALLBACK_BUTTON2_BAR = "Бар"
-CALLBACK_BUTTON3_RESTAURANT = "Ресторан"
-
-TITLES = {
-    CALLBACK_BUTTON1_CAFE: "Cafe ☕ ",
-    CALLBACK_BUTTON2_BAR: "Bar 🍺️ ",
-    CALLBACK_BUTTON3_RESTAURANT: "Restaurant 🍽️",
-}
-
-
-def get_place_keyboard():
-    keyboard = \
-        [
-            [
-                InlineKeyboardButton(TITLES[CALLBACK_BUTTON1_CAFE], callback_data=CALLBACK_BUTTON1_CAFE),
-                InlineKeyboardButton(TITLES[CALLBACK_BUTTON2_BAR], callback_data=CALLBACK_BUTTON2_BAR),
-            ],
-            [
-                InlineKeyboardButton(TITLES[CALLBACK_BUTTON3_RESTAURANT], callback_data=CALLBACK_BUTTON3_RESTAURANT),
-            ]
-        ]
-    return InlineKeyboardMarkup(keyboard)
 
 
 def do_eat(update: Update, context):
@@ -39,18 +14,16 @@ def do_eat(update: Update, context):
     return CHOOSING
 
 
-def button(update : Update, context: CallbackContext):
-    print("hi")
+def button(update: Update, context: CallbackContext):
     context.user_data['choice'] = update.callback_query.data
     update.callback_query.edit_message_text(
         text="Send U location",
     )
 
 
-def do_done(update : Update, context):
+def do_done(update: Update, context):
     i=0
     type_of_place = context.user_data['choice']
-    print(type_of_place)
     longitude,latitude = update.message.location.longitude, update.message.location.latitude
     result=search(type_of_place, longitude, latitude)
     while i < 3:
