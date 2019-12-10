@@ -4,17 +4,17 @@ import requests
 def search(type_of_place, longitude: float, latitude: float):
     try:
         request = "https://search-maps.yandex.ru/v1/?text=" + type_of_place + "&ll=" + str(longitude) + "," + str(
-            latitude) + "&spn=0.223456,0.223456&lang=ru_RU&apikey=8bdea3a2-ac05-4026-9666-a66104c79cca"
+            latitude) + "&spn=0.223456,0.223456&lang=en_EN&apikey=8bdea3a2-ac05-4026-9666-a66104c79cca"
         data = requests.get(request)
         response = data.json()
         i = 0
         result = {}
         while i < 3:
             answer = type_of_place + ": " + response['features'][i]['properties']['name'] + "\n" \
-                     + "at the address:" + response['features'][i]['properties']['description'] + "\n" \
-                     + "With number: " + response['features'][i]['properties']['CompanyMetaData']['Phones'][0][
+                     + "Address:" + response['features'][i]['properties']['description'] + "\n" \
+                     + "Зрщту: " + response['features'][i]['properties']['CompanyMetaData']['Phones'][0][
                          'formatted'] + "\n" \
-                     + "Time the work " + response['features'][i]['properties']['CompanyMetaData']['Hours']['text']
+                     + "Work time " + response['features'][i]['properties']['CompanyMetaData']['Hours']['text']
             result[str(i) + 'longitude'] = response['features'][i]['geometry']['coordinates'][0]
             result[str(i) + 'latitude'] = response['features'][i]['geometry']['coordinates'][1]
             result[str(i) + 'answer'] = answer

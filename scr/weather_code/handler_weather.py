@@ -3,6 +3,7 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler)
 from scr.weather_code.api_for_weather import request_current_weather, request_forecast
 from scr.other.keyboard import get_yes_keyboard
+from scr.weather_code.weather_to_image import converter_text_in_image
 LOCATION, CITY = range(2)
 
 
@@ -28,7 +29,7 @@ def do_city(update: Update, context):
     context.user_data['city'] = city
     answer = request_current_weather(city_name=city)
     update.message.reply_text(text=answer)
-    update.message.reply_text(text="Do you want to know weather in" + context.user_data.get('city') + " more DETAIL",
+    update.message.reply_text(text="Do you want to know weather in " + context.user_data.get('city') + " more DETAIL",
                               reply_markup=get_yes_keyboard())
 
 
@@ -38,10 +39,13 @@ def do_done(update: Update, context):
         if context.user_data.get('city') == '' or context.user_data.get('city') is None:
             answer = request_forecast(lon=context.user_data['longitude'],
                                       lat=context.user_data['latitude'])
-            context.bot.send_message(chat_id=chat_id, text=answer)
+            print("yes")
+            context.bot.send_photo(chat_id, photo=converter_text_in_image(answer))
         else:
+            print("yes")
             answer = request_forecast(city_name=context.user_data.get('city'))
-            context.bot.send_message(chat_id=chat_id, text=answer)
+
+            context.bot.send_photo(chat_id, photo=converter_text_in_image(answer))
     else:
         context.bot.send_message(chat_id=chat_id, text="Okay. Bay")
     return ConversationHandler.END

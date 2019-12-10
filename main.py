@@ -11,10 +11,11 @@ def do_start(update: Update, context):
         keyboard=location_keyboard,
         resize_keyboard=True,
     )
-    answer = " Hello, " + update.message.from_user.first_name + "\n I am u helper." \
-                                                                " If U want drink or eat, tap on - /eat \n" \
-                                                                "And I will show nearest the nearest bars or cafe or " \
-                                                                "restaurant "
+    answer = " Hello, " + update.message.from_user.first_name + \
+             "\n I am u helper." \
+             " If U want drink or eat, tap on - /eat \n" \
+             "And I will show nearest the nearest bars or cafe or " \
+             "restaurant "
     update.message.reply_text(text=answer, reply_markup=keyboard)
 
 
