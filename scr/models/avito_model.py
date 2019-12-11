@@ -5,22 +5,25 @@ from collections import namedtuple
 import bs4
 import requests
 
-
 InnerBlock = namedtuple('Block', 'title,price,currency,date,url')
 
 
 class Block(InnerBlock):
 
     def __str__(self):
-        return f'{self.title}\t{self.price} {self.currency}\t{self.date}\t{self.url}'
+        return f'{self.title}\nЦена: {self.price} {self.currency} \nДата размещения: {self.date}\nСсылка: {self.url}'
 
 
 class AvitoParser:
 
-    def __init__(self):
+    def __init__(self, metro, object_for_search, sort_type):
+        self.metro = metro
+        self.sort_type = sort_type
+        self.object_for_search = object_for_search
         self.session = requests.Session()
         self.session.headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.2 Safari/605.1.15',
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15) AppleWebKit/605.1.15 (KHTML, like Gecko) '
+                          'Version/13.0.2 Safari/605.1.15',
             'Accept-Language': 'ru',
         }
 
@@ -32,12 +35,13 @@ class AvitoParser:
         if page and page > 1:
             params['p'] = page
 
-        url = 'https://www.avito.ru/moskva/avtomobili/bmw'
+        url = f'https://www.avito.ru/sankt-peterburg?metro={self.metro}&q={self.object_for_search}&s={self.sort_type}'
+        print(url)
         r = self.session.get(url, params=params)
         return r.text
 
     @staticmethod
-    def parse_date(item: str):
+    def parse_date(item):
         params = item.strip().split(' ')
         # print(params)
         if len(params) == 2:
@@ -138,30 +142,34 @@ class AvitoParser:
         params = urllib.parse.parse_qs(r.query)
         return int(params['p'][0])
 
-    def get_blocks(self, page: int = None):
+    def get_blocks(self, page: int = 1):
         text = self.get_page(page=page)
         soup = bs4.BeautifulSoup(text, 'lxml')
 
         # Запрос CSS-селектора, состоящего из множества классов, производится через select
         container = soup.select('div.item.item_table.clearfix.js-catalog-item-enum.item-with-contact.js-item-extended')
-
+        array_for_block = []
+        i = 0
         for item in container:
-            print(item)
             block = self.parse_block(item=item)
-            print(block)
-
-    def parse_all(self):
-        limit = self.get_pagination_limit()
-        print(f'Всего страниц: {limit}')
-
-        for i in range(1, limit + 1):
-            self.get_blocks(page=i)
+            array_for_block.append(block)
+        return array_for_block
 
 
-def main():
-    p = AvitoParser()
-    p.parse_all()
+avito = AvitoParser(metro="159",
+                    object_for_search="bmw",
+                    sort_type='1')
 
+i = 0
+print("4")
+answer = avito.get_blocks()
+text = ""
+print(i)
+now = str(answer[1])
 
-if __name__ == '__main__':
-    main()
+print(type(now))
+print(now)
+   ## text = answer[i][0] + '/n' + "Цена: " + answer[i][1] + '\n' + "Дата размещения: " + answer[i][2] + '\n' + "Ссылка" + \
+    ##       answer[i][3] + '\n',
+    ##  text = str(text)
+## print(type(text))

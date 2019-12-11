@@ -1,9 +1,8 @@
 from telegram import Update
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler)
-from scr.weather_code.api_for_weather import request_current_weather, request_forecast
+from scr.models.api_for_weather import request_current_weather, request_forecast
 from scr.other.keyboard import get_yes_keyboard
-from scr.weather_code.weather_to_image import converter_text_in_image
 LOCATION, CITY = range(2)
 
 
@@ -39,25 +38,29 @@ def do_done(update: Update, context):
         if context.user_data.get('city') == '' or context.user_data.get('city') is None:
             answer = request_forecast(lon=context.user_data['longitude'],
                                       lat=context.user_data['latitude'])
-            print("yes")
-            context.bot.send_photo(chat_id, photo=converter_text_in_image(answer))
+            context.bot.send_message(chat_id=chat_id, text=answer)
         else:
-            print("yes")
             answer = request_forecast(city_name=context.user_data.get('city'))
-
-            context.bot.send_photo(chat_id, photo=converter_text_in_image(answer))
+            context.bot.send_message(chat_id=chat_id, text=answer)
     else:
         context.bot.send_message(chat_id=chat_id, text="Okay. Bay")
+
+    context.user_data.clear()
     return ConversationHandler.END
 
 
 def weather_handler():
     conv_handler = ConversationHandler(
-        entry_points=[CommandHandler('weather', do_start_weather)],
-        states={
+        entry_points=
+        [
+            CommandHandler('weather', do_start_weather)
+        ],
+        states=
+        {
             LOCATION: [MessageHandler(Filters.location, do_location),
                        MessageHandler(Filters.text, do_city)]
         },
-        fallbacks=[CallbackQueryHandler(do_done)]
+        fallbacks=
+        [CallbackQueryHandler(do_done)]
     )
     return conv_handler

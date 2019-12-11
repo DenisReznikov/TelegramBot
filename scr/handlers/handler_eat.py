@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler, CallbackContext)
-from scr.eat_code.api_for_eat import search
+from scr.models.api_for_eat import search
 from scr.other.keyboard import get_place_keyboard
 CHOOSING = range(1)
 
