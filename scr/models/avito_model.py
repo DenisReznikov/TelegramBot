@@ -9,13 +9,11 @@ InnerBlock = namedtuple('Block', 'title,price,currency,date,url')
 
 
 class Block(InnerBlock):
-
     def __str__(self):
         return f'{self.title}\nЦена: {self.price} {self.currency} \nДата размещения: {self.date}\nСсылка: {self.url}'
 
 
 class AvitoParser:
-
     def __init__(self, metro, object_for_search, sort_type):
         self.metro = metro
         self.sort_type = sort_type
@@ -149,27 +147,7 @@ class AvitoParser:
         # Запрос CSS-селектора, состоящего из множества классов, производится через select
         container = soup.select('div.item.item_table.clearfix.js-catalog-item-enum.item-with-contact.js-item-extended')
         array_for_block = []
-        i = 0
         for item in container:
             block = self.parse_block(item=item)
             array_for_block.append(block)
         return array_for_block
-
-
-avito = AvitoParser(metro="159",
-                    object_for_search="bmw",
-                    sort_type='1')
-
-i = 0
-print("4")
-answer = avito.get_blocks()
-text = ""
-print(i)
-now = str(answer[1])
-
-print(type(now))
-print(now)
-   ## text = answer[i][0] + '/n' + "Цена: " + answer[i][1] + '\n' + "Дата размещения: " + answer[i][2] + '\n' + "Ссылка" + \
-    ##       answer[i][3] + '\n',
-    ##  text = str(text)
-## print(type(text))

@@ -12,7 +12,7 @@ def search(type_of_place, longitude: float, latitude: float):
         while i < 3:
             answer = type_of_place + ": " + response['features'][i]['properties']['name'] + "\n" \
                      + "Address:" + response['features'][i]['properties']['description'] + "\n" \
-                     + "Зрщту: " + response['features'][i]['properties']['CompanyMetaData']['Phones'][0][
+                     + "Phone: " + response['features'][i]['properties']['CompanyMetaData']['Phones'][0][
                          'formatted'] + "\n" \
                      + "Work time " + response['features'][i]['properties']['CompanyMetaData']['Hours']['text']
             result[str(i) + 'longitude'] = response['features'][i]['geometry']['coordinates'][0]
