@@ -1,4 +1,4 @@
-name: pythonapp
+name: Bot unit-test
 
 on: [push]
 
