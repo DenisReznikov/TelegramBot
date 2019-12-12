@@ -25,7 +25,8 @@ def do_start(update: Update, context):
 
 
 def main():
-    TOKEN = os.environ.get('TOKEN_TELEGRAM')
+    TOKEN = os.environ.get('TELEGRAM_TOKEN')
+    print(TOKEN)
     updater = Updater(TOKEN, use_context=True)
     updater.dispatcher.add_handler(CommandHandler("start", do_start))
     updater.dispatcher.add_handler(eat_handler())
