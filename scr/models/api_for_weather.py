@@ -1,7 +1,7 @@
 import requests
 import os
 
-WEATHER_TOKEN = os.environ.get('WEATHER_TOKEN')
+WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
 
 
 def get_wind_direction(deg):

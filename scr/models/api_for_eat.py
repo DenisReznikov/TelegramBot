@@ -1,7 +1,7 @@
 import requests
 import os
 
-YANDEX_TOKEN = os.environ.get('YANDEX_TOKEN')
+YANDEX_TOKEN = os.environ['YANDEX_TOKEN']
 
 def search(type_of_place, longitude: float, latitude: float):
     try:
