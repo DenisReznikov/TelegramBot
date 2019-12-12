@@ -4,7 +4,7 @@ import requests
 def search(type_of_place, longitude: float, latitude: float):
     try:
         request = "https://search-maps.yandex.ru/v1/?text=" + type_of_place + "&ll=" + str(longitude) + "," + str(
-            latitude) + "&spn=0.223456,0.223456&lang=en_EN&apikey=8bdea3a2-ac05-4026-9666-a66104c79cca"
+            latitude) + "&spn=0.223456,0.223456&lang=en_EN&apikey="
         data = requests.get(request)
         response = data.json()
         i = 0

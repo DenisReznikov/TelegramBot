@@ -1,10 +1,9 @@
 import requests
 
-appid = "946558766c1ac9bd3a6294b734d80252"
 
 
 def get_wind_direction(deg):
-    l = [' N ', 'NE ', ' E ', 'SE ', ' S ', 'SW ', ' W ', 'NW ']
+    compass_point = [' N ', 'NE ', ' E ', 'SE ', ' S ', 'SW ', ' W ', 'NW ']
     for i in range(0, 8):
         step = 45.
         min = i * step - 45 / 2.
@@ -12,7 +11,7 @@ def get_wind_direction(deg):
         if i == 0 and deg > 360 - 45 / 2.:
             deg = deg - 360
         if deg >= min and deg <= max:
-            res = l[i]
+            res = compass_point[i]
             break
     return res
 
@@ -62,5 +61,3 @@ def request_forecast(city_name="", lon=0, lat=0):
         print("Exception (forecast):", e)
         return "Something go wrong"
         pass
-
-
