@@ -3,10 +3,11 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler, CallbackContext)
 from scr.models.api_for_eat import search
 from scr.other.keyboard import get_place_keyboard
+from scr.other.logger import debug_requests
 
 CHOOSING = range(1)
 
-
+@debug_requests
 def do_eat(update: Update, context):
     update.message.reply_text(
         text="Select a category to search.",
@@ -15,6 +16,7 @@ def do_eat(update: Update, context):
     return CHOOSING
 
 
+@debug_requests
 def button(update: Update, context: CallbackContext):
     context.user_data['choice'] = update.callback_query.data
     update.callback_query.edit_message_text(
@@ -22,6 +24,7 @@ def button(update: Update, context: CallbackContext):
     )
 
 
+@debug_requests
 def do_done(update: Update, context):
     i = 0
     type_of_place = context.user_data['choice']

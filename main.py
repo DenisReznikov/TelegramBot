@@ -4,9 +4,9 @@ from scr.handlers.handler_eat import eat_handler
 from scr.handlers.handler_weather import weather_handler
 from scr.handlers.avito_handler import avito_handler
 import os
+from scr.other.logger import debug_requests
 
-
-
+@debug_requests
 def do_start(update: Update, context):
     # TODO: перенести клавву в другой класс
     print("das")

@@ -3,10 +3,12 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler)
 from scr.models.api_for_weather import request_current_weather, request_forecast
 from scr.other.keyboard import get_yes_keyboard
+from scr.other.logger import debug_requests
 
 LOCATION, CITY = range(2)
 
 
+@debug_requests
 def do_start_weather(update: Update, context):
     update.message.reply_text(
         text="Send name of city or u location"
@@ -14,6 +16,7 @@ def do_start_weather(update: Update, context):
     return LOCATION
 
 
+@debug_requests
 def do_location(update: Update, context):
     longitude, latitude = update.message.location.longitude, update.message.location.latitude
     context.user_data['city'] = ''
@@ -24,6 +27,7 @@ def do_location(update: Update, context):
                               reply_markup=get_yes_keyboard())
 
 
+@debug_requests
 def do_city(update: Update, context):
     city = update.message.text
     context.user_data['city'] = city
@@ -33,6 +37,7 @@ def do_city(update: Update, context):
                               reply_markup=get_yes_keyboard())
 
 
+@debug_requests
 def do_done(update: Update, context):
     chat_id = update.effective_message.chat_id
     if update.callback_query.data == 'Yes':
