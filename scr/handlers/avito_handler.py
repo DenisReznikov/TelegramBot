@@ -8,7 +8,7 @@ from scr.models.avito_model import AvitoParser
 METRO, TYPE_SORT = range(2)
 
 
-def do_avito(update: Update):
+def do_avito(update: Update,context):
     update.message.reply_text(
         text="Напишите название вещи для поиска. Например: BMW",
     )

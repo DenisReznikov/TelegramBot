@@ -6,8 +6,10 @@ from scr.handlers.avito_handler import avito_handler
 import os
 
 
-def do_start(update: Update):
+
+def do_start(update: Update, context):
     # TODO: перенести клавву в другой класс
+    print("das")
     location_keyboard = [[KeyboardButton("Send location", request_location=True), ], ]
     keyboard = ReplyKeyboardMarkup(
         keyboard=location_keyboard,
@@ -26,7 +28,7 @@ def do_start(update: Update):
 
 def main():
     TOKEN = os.environ['TELEGRAM_TOKEN']
-    updater = Updater(TOKEN, use_context=True)
+    updater = Updater("790323839:AAGCpqOp4LXWd3O0DNYem32FyzF-32kRyGk", use_context=True)
     updater.dispatcher.add_handler(CommandHandler("start", do_start))
     updater.dispatcher.add_handler(eat_handler())
     updater.dispatcher.add_handler(weather_handler())

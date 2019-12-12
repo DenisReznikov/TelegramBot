@@ -7,7 +7,7 @@ from scr.other.keyboard import get_place_keyboard
 CHOOSING = range(1)
 
 
-def do_eat(update: Update):
+def do_eat(update: Update, context):
     update.message.reply_text(
         text="Select a category to search.",
         reply_markup=get_place_keyboard()

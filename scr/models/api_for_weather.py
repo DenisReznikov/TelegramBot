@@ -1,9 +1,5 @@
 import requests
 import os
-
-WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
-
-
 def get_wind_direction(deg):
     compass_point = [' N ', 'NE ', ' E ', 'SE ', ' S ', 'SW ', ' W ', 'NW ']
     res = ""
@@ -22,6 +18,7 @@ def get_wind_direction(deg):
 # Запрос текущей погоды
 def request_current_weather(city_name="", lon=0, lat=0):
     try:
+        WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
         if city_name == "":
             res = requests.get("http://api.openweathermap.org/data/2.5/weather",
                                params={'lat': str(lat), 'lon': str(lon), 'units': 'metric', 'lang': 'en',
@@ -45,6 +42,7 @@ def request_current_weather(city_name="", lon=0, lat=0):
 # Прогноз
 def request_forecast(city_name="", lon=0, lat=0):
     try:
+        WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
         if city_name == "":
             res = requests.get("https://api.openweathermap.org/data/2.5/forecast",
                                params={'lat': str(lat), 'lon': str(lon), 'units': 'metric', 'lang': 'en',

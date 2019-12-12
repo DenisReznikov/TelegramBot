@@ -7,7 +7,7 @@ from scr.other.keyboard import get_yes_keyboard
 LOCATION, CITY = range(2)
 
 
-def do_start_weather(update: Update):
+def do_start_weather(update: Update, context):
     update.message.reply_text(
         text="Send name of city or u location"
     )
