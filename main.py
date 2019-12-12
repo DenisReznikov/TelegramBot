@@ -6,7 +6,7 @@ from scr.handlers.avito_handler import avito_handler
 import os
 
 
-def do_start(update: Update, context):
+def do_start(update: Update):
     # TODO: перенести клавву в другой класс
     location_keyboard = [[KeyboardButton("Send location", request_location=True), ], ]
     keyboard = ReplyKeyboardMarkup(

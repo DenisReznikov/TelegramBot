@@ -6,6 +6,7 @@ WEATHER_TOKEN = os.environ.get('WEATHER_TOKEN')
 
 def get_wind_direction(deg):
     compass_point = [' N ', 'NE ', ' E ', 'SE ', ' S ', 'SW ', ' W ', 'NW ']
+    res = ""
     for i in range(0, 8):
         step = 45.
         min = i * step - 45 / 2.

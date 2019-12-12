@@ -42,7 +42,7 @@ def get_avito_keyboard():
         [
             [
                 InlineKeyboardButton(AVITO_TITLES[CALLBACK_BUTTON2_CHEAPER], callback_data=CALLBACK_BUTTON2_CHEAPER),
-                InlineKeyboardButton(AVITO_TITLES[CALLBACK_BUTTON3_EXPENSIVE], callback_data=CALLBACK_BUTTON3_EXPENSIVE),
+                InlineKeyboardButton(AVITO_TITLES[CALLBACK_BUTTON3_EXPENSIVE], callback_data=CALLBACK_BUTTON3_EXPENSIVE)
             ],
             [
                 InlineKeyboardButton(AVITO_TITLES[CALLBACK_BUTTON1_NEWER], callback_data=CALLBACK_BUTTON1_NEWER),
