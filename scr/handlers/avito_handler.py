@@ -10,6 +10,7 @@ METRO, TYPE_SORT = range(2)
 
 @debug_requests
 def do_avito(update: Update, context):
+    print("Sada")
     update.message.reply_text(
         text="Напишите название вещи для поиска. Например: BMW",
     )
@@ -53,6 +54,7 @@ def send_result(update: Update, context: CallbackContext):
         context.bot.send_message(chat_id=chat_id, text=text)
     context.user_data.clear()
     return ConversationHandler.END
+
 
 
 def avito_handler():
