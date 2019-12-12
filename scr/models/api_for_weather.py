@@ -1,5 +1,7 @@
 import requests
+import os
 
+WEATHER_TOKEN = os.environ.get('WEATHER_TOKEN')
 
 
 def get_wind_direction(deg):
@@ -22,10 +24,10 @@ def request_current_weather(city_name="", lon=0, lat=0):
         if city_name == "":
             res = requests.get("http://api.openweathermap.org/data/2.5/weather",
                                params={'lat': str(lat), 'lon': str(lon), 'units': 'metric', 'lang': 'en',
-                                       'APPID': appid})
+                                       'APPID': WEATHER_TOKEN})
         else:
             res = requests.get("http://api.openweathermap.org/data/2.5/weather",
-                               params={'q': city_name, 'units': 'metric', 'lang': 'en', 'APPID': appid})
+                               params={'q': city_name, 'units': 'metric', 'lang': 'en', 'APPID': WEATHER_TOKEN})
         data = res.json()
         answer = ''
         answer += "conditions:  " + str(data['weather'][0]['description']) + '\n'
@@ -45,10 +47,10 @@ def request_forecast(city_name="", lon=0, lat=0):
         if city_name == "":
             res = requests.get("https://api.openweathermap.org/data/2.5/forecast",
                                params={'lat': str(lat), 'lon': str(lon), 'units': 'metric', 'lang': 'en',
-                                       'APPID': appid})
+                                       'APPID': WEATHER_TOKEN})
         else:
             res = requests.get("https://api.openweathermap.org/data/2.5/forecast",
-                               params={'q': city_name, 'units': 'metric', 'lang': 'en', 'APPID': appid})
+                               params={'q': city_name, 'units': 'metric', 'lang': 'en', 'APPID': WEATHER_TOKEN})
         data = res.json()
         answer = ''
         for i in data['list']:

@@ -1,10 +1,12 @@
 import requests
+import os
 
+YANDEX_TOKEN = os.environ.get('YANDEX_TOKEN')
 
 def search(type_of_place, longitude: float, latitude: float):
     try:
         request = "https://search-maps.yandex.ru/v1/?text=" + type_of_place + "&ll=" + str(longitude) + "," + str(
-            latitude) + "&spn=0.223456,0.223456&lang=en_EN&apikey="
+            latitude) + "&spn=0.223456,0.223456&lang=en_EN&apikey=" + YANDEX_TOKEN
         data = requests.get(request)
         response = data.json()
         i = 0

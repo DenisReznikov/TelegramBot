@@ -3,6 +3,8 @@ from telegram.ext import Updater, CommandHandler
 from scr.handlers.handler_eat import eat_handler
 from scr.handlers.handler_weather import weather_handler
 from scr.handlers.avito_handler import avito_handler
+import os
+
 
 def do_start(update: Update, context):
     # TODO: перенести клавву в другой класс
@@ -23,7 +25,8 @@ def do_start(update: Update, context):
 
 
 def main():
-    updater = Updater(, use_context=True)
+    TOKEN = os.environ.get('TOKEN_TELEGRAM')
+    updater = Updater(TOKEN, use_context=True)
     updater.dispatcher.add_handler(CommandHandler("start", do_start))
     updater.dispatcher.add_handler(eat_handler())
     updater.dispatcher.add_handler(weather_handler())
