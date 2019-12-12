@@ -23,7 +23,7 @@ def do_start(update: Update, context):
 
 
 def main():
-    updater = Updater("", use_context=True)
+    updater = Updater(, use_context=True)
     updater.dispatcher.add_handler(CommandHandler("start", do_start))
     updater.dispatcher.add_handler(eat_handler())
     updater.dispatcher.add_handler(weather_handler())
