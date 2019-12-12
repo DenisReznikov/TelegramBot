@@ -18,8 +18,7 @@ def do_avito(update: Update):
 def add_metro(update: Update, context):
     context.user_data['object_for_search'] = update.message.text
     update.message.reply_text(
-        text="Теперь напишите свое метро",
-    )
+        text="Теперь напишите свое метро",)
     return TYPE_SORT
 
 
@@ -27,14 +26,12 @@ def choose_type_sort(update: Update, context):
     if update.message.text in metro_dictionary:
         context.user_data['metro'] = metro_dictionary[update.message.text]
     else:
-        update.message.reply_text(
-            text="Такого метро я не знаю. Пока 👋")
+        update.message.reply_text(text="Такого метро я не знаю. Пока 👋")
         context.user_data.clear()
         return ConversationHandler.END
     update.message.reply_text(
         text="Теперь выберите порядок сортировки",
-        reply_markup=get_avito_keyboard()
-    )
+        reply_markup=get_avito_keyboard())
 
 
 def send_result(update: Update, context: CallbackContext):
