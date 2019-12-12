@@ -3,10 +3,11 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler, CallbackContext)
 from scr.models.api_for_eat import search
 from scr.other.keyboard import get_place_keyboard
+
 CHOOSING = range(1)
 
 
-def do_eat(update: Update, context):
+def do_eat(update: Update):
     update.message.reply_text(
         text="Select a category to search.",
         reply_markup=get_place_keyboard()
@@ -22,14 +23,14 @@ def button(update: Update, context: CallbackContext):
 
 
 def do_done(update: Update, context):
-    i=0
+    i = 0
     type_of_place = context.user_data['choice']
-    longitude,latitude = update.message.location.longitude, update.message.location.latitude
-    result=search(type_of_place, longitude, latitude)
+    longitude, latitude = update.message.location.longitude, update.message.location.latitude
+    result = search(type_of_place, longitude, latitude)
     while i < 3:
-        answer = result[str(i)+'answer']
-        longitude = result[str(i)+'longitude']
-        latitude = result[str(i)+'latitude']
+        answer = result[str(i) + 'answer']
+        longitude = result[str(i) + 'longitude']
+        latitude = result[str(i) + 'latitude']
         update.message.reply_text(text=answer)
         update.message.reply_location(longitude=longitude, latitude=latitude)
         i += 1
@@ -40,8 +41,7 @@ def do_done(update: Update, context):
 def eat_handler():
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('eat', do_eat)],
-        states=
-        {CHOOSING: [CallbackQueryHandler(button)]},
+        states={CHOOSING: [CallbackQueryHandler(button)]},
         fallbacks=[MessageHandler(Filters.location, do_done)]
     )
     return conv_handler

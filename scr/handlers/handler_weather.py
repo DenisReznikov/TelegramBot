@@ -3,10 +3,11 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler)
 from scr.models.api_for_weather import request_current_weather, request_forecast
 from scr.other.keyboard import get_yes_keyboard
+
 LOCATION, CITY = range(2)
 
 
-def do_start_weather(update: Update, context):
+def do_start_weather(update: Update):
     update.message.reply_text(
         text="Send name of city or u location"
     )
@@ -60,7 +61,6 @@ def weather_handler():
             LOCATION: [MessageHandler(Filters.location, do_location),
                        MessageHandler(Filters.text, do_city)]
         },
-        fallbacks=
-        [CallbackQueryHandler(do_done)]
+        fallbacks=[CallbackQueryHandler(do_done)]
     )
     return conv_handler

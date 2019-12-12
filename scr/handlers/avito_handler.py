@@ -16,7 +16,6 @@ def do_avito(update: Update):
 
 
 def add_metro(update: Update, context):
-    # TODO поменять пробулы на ++
     context.user_data['object_for_search'] = update.message.text
     update.message.reply_text(
         text="Теперь напишите свое метро",
@@ -49,7 +48,6 @@ def send_result(update: Update, context: CallbackContext):
     answer = avito.get_blocks()
     while i < 7:
         i = i + 1
-        # TODO добавить перегрузку Str
         text = str(answer[i])
         context.bot.send_message(chat_id=chat_id, text=text)
     context.user_data.clear()
