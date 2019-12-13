@@ -1,6 +1,7 @@
 ![GitHub Actions status](https://github.com/DenisReznikov/TelegramPolikekBot/workflows/bot%20unit%20test/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![BCH compliance](https://bettercodehub.com/edge/badge/DenisReznikov/TelegramPolikekBot?branch=master)](https://bettercodehub.com/)
+[![codebeat badge](https://codebeat.co/badges/b7e5226b-4d10-4900-bbb4-98d7168128e9)](https://codebeat.co/projects/github-com-denisreznikov-telegrampolikekbot-master)
 
 # Telegram Пolitex bot
 
