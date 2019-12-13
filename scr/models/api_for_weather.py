@@ -15,7 +15,6 @@ def get_wind_direction(deg):
     return res
 
 
-# Запрос текущей погоды
 def request_current_weather(city_name="", lon=0, lat=0):
     try:
         WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
