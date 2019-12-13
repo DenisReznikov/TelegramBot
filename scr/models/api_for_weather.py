@@ -43,7 +43,7 @@ def request_current_weather(city_name="", lon=0, lat=0):
 def request_forecast(city_name="", lon=0, lat=0):
     try:
         WEATHER_TOKEN = os.environ['WEATHER_TOKEN']
-        if city_name == "":
+        if "" == city_name:
             res = requests.get("https://api.openweathermap.org/data/2.5/forecast",
                                params={'lat': str(lat), 'lon': str(lon), 'units': 'metric', 'lang': 'en',
                                        'APPID': WEATHER_TOKEN})
