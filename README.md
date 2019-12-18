@@ -29,5 +29,10 @@ telegrambot/
 ├── scr/ 
 |   ├── models/                    // model (work with weather and Yandex.Map API and parsing Avito)
 |   ├── handler/                   // connect model and telegram API
-├── test/                          // Unit test for simulate the CI/CD
 ```
+### CI/CD
+Plus bot has unit test, for simulate
+[CI](https://github.com/DenisReznikov/TelegramBot/actions)
+and we deploy our bot to heroku
+[CD](https://github.com/DenisReznikov/TelegramBot/deployments)
+## Example of work bot
