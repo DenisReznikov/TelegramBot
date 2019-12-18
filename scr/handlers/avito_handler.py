@@ -3,7 +3,7 @@ from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler, CallbackContext)
 from scr.other.keyboard import get_avito_keyboard
 from scr.other.metro_dict import metro_dictionary
-from scr.models.avito_model import AvitoParser
+from scr.model.avito_model import AvitoParser
 from scr.other.logger import debug_requests
 METRO, TYPE_SORT = range(2)
 

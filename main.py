@@ -15,12 +15,12 @@ def do_start(update: Update, context):
         resize_keyboard=True,
     )
 
-    answer = "Привет, *" + update.message.from_user.first_name + "* " + \
+    answer = "Привет, " + update.message.from_user.first_name + " " + \
              "\n Я твой помощник." \
-             "Если ты хочешь *пить* или есть нажми -> /eat \n" \
+             "Если вы хотите пить или есть, нажмите -> /eat \n" \
              " \n"\
-             "Что-бы - /weather" \
-             "or if you want I can find something on the avito  tap on - /avito" \
+             "Чтобы посмотреть погоду - /weather" \
+             "Или если вы хотите я могу найти что-то на Авито, нажмите - /avito" \
 
     update.message.reply_text(text=answer, reply_markup=keyboard)
 

@@ -1,5 +1,5 @@
 import unittest
-from scr.models.api_for_weather import get_wind_direction
+from scr.model.api_for_weather import get_wind_direction
 
 class MyTestCase(unittest.TestCase):
     def test_something(self):

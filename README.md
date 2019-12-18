@@ -27,7 +27,7 @@ I tried to stick to the to the MVC pattern (Model-View-Controller) without view 
 ```
 telegrambot/
 ├── scr/ 
-|   ├── models/                    // model (work with weather and Yandex.Map API and parsing Avito)
+|   ├── model/                    // model (work with weather and Yandex.Map API and parsing Avito)
 |   ├── handler/                   // connect model and telegram API
 ```
 ### CI/CD
@@ -36,3 +36,4 @@ Plus bot has unit test, for simulate
 and we deploy our bot to heroku
 [CD](https://github.com/DenisReznikov/TelegramBot/deployments)
 ## Example of work bot
+![teleg](https://user-images.githubusercontent.com/52967686/71078628-d4609100-219a-11ea-9608-df47ba548d84.gif)

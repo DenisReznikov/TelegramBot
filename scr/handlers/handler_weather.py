@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler)
-from scr.models.api_for_weather import request_current_weather, request_forecast
+from scr.model.api_for_weather import request_current_weather, request_forecast
 from scr.other.keyboard import get_yes_keyboard
 from scr.other.logger import debug_requests
 

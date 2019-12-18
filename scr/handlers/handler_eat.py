@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import (CommandHandler, MessageHandler, Filters,
                           ConversationHandler, CallbackQueryHandler, CallbackContext)
-from scr.models.api_for_eat import search
+from scr.model.api_for_eat import search
 from scr.other.keyboard import get_place_keyboard
 from scr.other.logger import debug_requests
 
